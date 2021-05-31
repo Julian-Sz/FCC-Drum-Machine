@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 body {
   margin: 0;
   display: flex;
@@ -9,27 +5,85 @@ body {
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(45deg, #ef5777, #ffd32a, #0be881);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 #drum-machine {
   width: 90vw;
   height: 90vh;
-  background-color: grey;
+  background-color: #485460;
 }
 
+/* wraps all buttons */
 #db-wrapper {
   display: flex;
+  width: 90%;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
+/* The button container */
 .drum-button {
-  width: 50%;
+  width: 40%;
   height: 50px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  margin: 15px 15px 15px 15px;
+  border-radius: 10px;
 }
 
-button {
+/* The actual button */
+.drum-pad {
   width: 100%;
   height: 100%;
+  border-radius: 10px;
+  border: none;
+  padding: 0;
+  background: #009432;
+  outline-offset: 4px;
+}
+
+.drum-pad:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Nothing within that button should have pointer-events */
+.drum-pad > * {
+  pointer-events: none;
+}
+
+/* The span in the button */
+.front {
+  width: 100%;
+  height: 100%;
+  background: #0be881;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  will-change: transform;
+  transition: transform 0.2s ease-in-out;
+  transform: translateY(-6px);
+}
+
+.drum-pad:hover .front {
+  transform: translateY(-8px);
+}
+
+.drum-pad:active .front {
+  transform: translateY(-2px);
+}
+
+#display-text {
+  font-size: 40px;
+  color: white;
 }
