@@ -7,61 +7,65 @@ const buttonsObject = [
   {
     press: "q",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/d5474a6ef10ea81ce18057596794cd2777dd9c44/src/sounds/Bass%20Chord%201.wav",
-    name: "Bass Chord 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Clap%201.mp3",
+    name: "",
   },
   {
     press: "w",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Beep%201.wav",
-    name: "Beep 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Clap%202.mp3",
+    name: "",
   },
   {
     press: "e",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Cymbal%201.wav",
-    name: "Cymbal 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Conga%20High.mp3",
+    name: "",
   },
   {
     press: "a",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Drum%201.wav",
-    name: "Drum 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Conga%20Mid.mp3",
+    name: "",
   },
   {
     press: "s",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/E-Guitar%201.wav",
-    name: "E-Guitar Chord 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Conga%20Low.mp3",
+    name: "",
   },
   {
     press: "d",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Guitar%20Chord.wav",
-    name: "Guitar Chord 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Cowbell.mp3",
+    name: "",
   },
   {
     press: "z",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Guitar%20Chord%202.wav",
-    name: "Guitar Chord 2",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Hihat%20Open.mp3",
+    name: "",
   },
   {
     press: "x",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Laser-1.wav",
-    name: "Laser 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Mid%20Tom.mp3",
+    name: "",
   },
   {
     press: "c",
     source:
-      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Snare%20Drum%201.wav",
-    name: "Snare Drum 1",
+      "https://github.com/Julian-Sz/FCC-Drum-Machine/blob/main/src/sounds/Pop%20Chord%201.mp3",
+    name: "",
   },
 ];
 
-//get raw file from github as source
+//get raw file from github as source and set the name of each button
+let nameRegEx = /.+\/(.*)\.mp3$/;
 for (let i = 0; i < buttonsObject.length; i++) {
+  buttonsObject[i].name = decodeURI(buttonsObject[i].source).match(
+    nameRegEx
+  )[1];
   buttonsObject[i].source = buttonsObject[i].source + "?raw=true";
 }
 
@@ -136,7 +140,7 @@ const Display = (props) => {
 
 let attached = false;
 function App() {
-  const [state, setState] = useState({ text: "Display" });
+  const [state, setState] = useState({ text: "Press a button" });
   var changedisplaytext = (text) => {
     setState({ text: text });
   };
