@@ -1,7 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
-
-// import Laser from "./sounds/Laser-1.wav";
+import React, { useState, useEffect } from "react";
 
 const buttonsObject = [
   {
@@ -71,8 +69,6 @@ for (let i = 0; i < buttonsObject.length; i++) {
 
 const handleKeyPressWrapper = (setTextFunc) => {
   return (e) => {
-    console.log("key", e.key);
-
     try {
       document.getElementById(e.key.toUpperCase()).currentTime = 0;
       document.getElementById(e.key.toUpperCase()).play();
@@ -83,6 +79,7 @@ const handleKeyPressWrapper = (setTextFunc) => {
           break;
         }
       }
+
       setTextFunc(name);
     } catch {}
   };
@@ -90,13 +87,9 @@ const handleKeyPressWrapper = (setTextFunc) => {
 
 const dbHandleClickWrapper = (setTextFunc) => {
   return (e) => {
-    console.log("event.target.attributes.customkey", e.target);
     const customkey = e.target.attributes.customkey.value;
-    console.log("cust", customkey.value);
     const button = buttonsObject[customkey];
     const id = button.press.toUpperCase();
-    console.log(id);
-    console.log("element", document.getElementById(id));
     document.getElementById(id).currentTime = 0;
     document.getElementById(id).play();
     setTextFunc(button.name);
@@ -138,18 +131,23 @@ const Display = (props) => {
   );
 };
 
-let attached = false;
+let listenerAttached = false;
 function App() {
   const [state, setState] = useState({ text: "Press a button" });
-  var changedisplaytext = (text) => {
+  useEffect(() => {
+    console.log("useEffect", state);
+  });
+  const changedisplaytext = (text) => {
+    console.log("state change function called", text);
     setState({ text: text });
+    console.log("new state", state);
   };
-  if (!attached) {
+  if (!listenerAttached) {
     document.addEventListener(
       "keydown",
       handleKeyPressWrapper(changedisplaytext)
     );
-    attached = true;
+    listenerAttached = true;
   }
   return (
     <div className="App" id="drum-machine">
