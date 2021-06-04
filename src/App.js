@@ -137,7 +137,7 @@ function App() {
   useEffect(() => {
     console.log("useEffect", state);
   });
-  const changedisplaytext = (text) => {
+  const changeDisplayText = (text) => {
     console.log("state change function called", text);
     setState({ text: text });
     console.log("new state", state);
@@ -145,14 +145,14 @@ function App() {
   if (!listenerAttached) {
     document.addEventListener(
       "keydown",
-      handleKeyPressWrapper(changedisplaytext)
+      handleKeyPressWrapper(changeDisplayText)
     );
     listenerAttached = true;
   }
   return (
     <div className="App" id="drum-machine">
       <Display text={state.text} />
-      <DrumButtons changetext={changedisplaytext} />
+      <DrumButtons changetext={changeDisplayText} />
     </div>
   );
 }
