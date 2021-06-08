@@ -231,7 +231,6 @@ function App(props) {
           props.buttonsarr[i];
       }
     }
-    console.log("final buttons", buttonsarr);
   } else {
     buttonsarr = [...props.buttonsarr];
 
@@ -251,18 +250,10 @@ function App(props) {
           continue;
         }
       }
-      console.log("Indexes y and z", yIndex, zIndex);
       let zObj = buttonsarr[zIndex];
-      console.log("buttonsArr[zIndex]", buttonsarr[zIndex]);
-      console.log("buttonsArr[yIndex]", buttonsarr[yIndex]);
-      console.log("zObj", zObj);
       buttonsarr[zIndex] = buttonsarr[yIndex];
       buttonsarr[yIndex] = zObj;
-      console.log("buttonsarr[yIndex]", buttonsarr[yIndex], "yIndex", yIndex);
-      console.log("final buttonsarr", buttonsarr);
     }
-
-    console.log("else triggered", buttonsarr);
   }
 
   let lastButtonsarr = React.useRef([]);
