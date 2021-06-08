@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/FCC-Drum-Machine/static/css/main.02767eb5.chunk.css",
-    "main.js": "/FCC-Drum-Machine/static/js/main.ae5a6868.chunk.js",
-    "main.js.map": "/FCC-Drum-Machine/static/js/main.ae5a6868.chunk.js.map",
+    "main.css": "/FCC-Drum-Machine/static/css/main.81bae64a.chunk.css",
+    "main.js": "/FCC-Drum-Machine/static/js/main.f290a6cc.chunk.js",
+    "main.js.map": "/FCC-Drum-Machine/static/js/main.f290a6cc.chunk.js.map",
     "runtime-main.js": "/FCC-Drum-Machine/static/js/runtime-main.bff2a7f7.js",
     "runtime-main.js.map": "/FCC-Drum-Machine/static/js/runtime-main.bff2a7f7.js.map",
     "static/js/2.be5e2e39.chunk.js": "/FCC-Drum-Machine/static/js/2.be5e2e39.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.333aedd6.chunk.js": "/FCC-Drum-Machine/static/js/3.333aedd6.chunk.js",
     "static/js/3.333aedd6.chunk.js.map": "/FCC-Drum-Machine/static/js/3.333aedd6.chunk.js.map",
     "index.html": "/FCC-Drum-Machine/index.html",
-    "static/css/main.02767eb5.chunk.css.map": "/FCC-Drum-Machine/static/css/main.02767eb5.chunk.css.map",
+    "static/css/main.81bae64a.chunk.css.map": "/FCC-Drum-Machine/static/css/main.81bae64a.chunk.css.map",
     "static/js/2.be5e2e39.chunk.js.LICENSE.txt": "/FCC-Drum-Machine/static/js/2.be5e2e39.chunk.js.LICENSE.txt",
     "static/media/App.css": "/FCC-Drum-Machine/static/media/digital-7.regular.93911ab1.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.bff2a7f7.js",
     "static/js/2.be5e2e39.chunk.js",
-    "static/css/main.02767eb5.chunk.css",
-    "static/js/main.ae5a6868.chunk.js"
+    "static/css/main.81bae64a.chunk.css",
+    "static/js/main.f290a6cc.chunk.js"
   ]
 }
