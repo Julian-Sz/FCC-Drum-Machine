@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/FCC-Drum-Machine/static/css/main.a8c6da69.chunk.css",
-    "main.js": "/FCC-Drum-Machine/static/js/main.6ba7dc62.chunk.js",
-    "main.js.map": "/FCC-Drum-Machine/static/js/main.6ba7dc62.chunk.js.map",
-    "runtime-main.js": "/FCC-Drum-Machine/static/js/runtime-main.bf4c15f4.js",
-    "runtime-main.js.map": "/FCC-Drum-Machine/static/js/runtime-main.bf4c15f4.js.map",
-    "static/js/2.dfbdee2d.chunk.js": "/FCC-Drum-Machine/static/js/2.dfbdee2d.chunk.js",
-    "static/js/2.dfbdee2d.chunk.js.map": "/FCC-Drum-Machine/static/js/2.dfbdee2d.chunk.js.map",
-    "static/js/3.c552253f.chunk.js": "/FCC-Drum-Machine/static/js/3.c552253f.chunk.js",
-    "static/js/3.c552253f.chunk.js.map": "/FCC-Drum-Machine/static/js/3.c552253f.chunk.js.map",
+    "main.css": "/FCC-Drum-Machine/static/css/main.02767eb5.chunk.css",
+    "main.js": "/FCC-Drum-Machine/static/js/main.ae5a6868.chunk.js",
+    "main.js.map": "/FCC-Drum-Machine/static/js/main.ae5a6868.chunk.js.map",
+    "runtime-main.js": "/FCC-Drum-Machine/static/js/runtime-main.bff2a7f7.js",
+    "runtime-main.js.map": "/FCC-Drum-Machine/static/js/runtime-main.bff2a7f7.js.map",
+    "static/js/2.be5e2e39.chunk.js": "/FCC-Drum-Machine/static/js/2.be5e2e39.chunk.js",
+    "static/js/2.be5e2e39.chunk.js.map": "/FCC-Drum-Machine/static/js/2.be5e2e39.chunk.js.map",
+    "static/js/3.333aedd6.chunk.js": "/FCC-Drum-Machine/static/js/3.333aedd6.chunk.js",
+    "static/js/3.333aedd6.chunk.js.map": "/FCC-Drum-Machine/static/js/3.333aedd6.chunk.js.map",
     "index.html": "/FCC-Drum-Machine/index.html",
-    "static/css/main.a8c6da69.chunk.css.map": "/FCC-Drum-Machine/static/css/main.a8c6da69.chunk.css.map",
-    "static/js/2.dfbdee2d.chunk.js.LICENSE.txt": "/FCC-Drum-Machine/static/js/2.dfbdee2d.chunk.js.LICENSE.txt"
+    "static/css/main.02767eb5.chunk.css.map": "/FCC-Drum-Machine/static/css/main.02767eb5.chunk.css.map",
+    "static/js/2.be5e2e39.chunk.js.LICENSE.txt": "/FCC-Drum-Machine/static/js/2.be5e2e39.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/FCC-Drum-Machine/static/media/digital-7.regular.93911ab1.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.bf4c15f4.js",
-    "static/js/2.dfbdee2d.chunk.js",
-    "static/css/main.a8c6da69.chunk.css",
-    "static/js/main.6ba7dc62.chunk.js"
+    "static/js/runtime-main.bff2a7f7.js",
+    "static/js/2.be5e2e39.chunk.js",
+    "static/css/main.02767eb5.chunk.css",
+    "static/js/main.ae5a6868.chunk.js"
   ]
 }
