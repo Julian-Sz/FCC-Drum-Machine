@@ -10,6 +10,7 @@ body {
   align-items: center;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   background: linear-gradient(45deg, #ef5777, #ffd32a, #0be881);
 }
 
@@ -45,6 +46,12 @@ body {
   border-radius: 5px;
 }
 
+#display-text {
+  font-size: 40px;
+  font-family: digital;
+  color: #e74c3c;
+}
+
 #options {
   grid-area: options;
   background-color: #2c3e50;
@@ -65,17 +72,18 @@ body {
 /* wraps all buttons */
 #db-wrapper {
   grid-area: buttons;
-  display: flex;
+  align-self: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 90%;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-items: center;
   align-items: center;
 }
 
 /* The button container */
 .drum-button {
-  width: 40%;
-  height: 50px;
+  width: 90%;
+  height: 70px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   margin: 15px 15px 15px 15px;
   border-radius: 10px;
@@ -122,12 +130,6 @@ body {
 
 .drum-pad:active .front {
   transform: translateY(-2px);
-}
-
-#display-text {
-  font-size: 40px;
-  font-family: digital;
-  color: #e74c3c;
 }
 
 button {

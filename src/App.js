@@ -1,9 +1,13 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const handleKeyPressWrapper = (setTextFunc, buttonsarr) => {
   return (e) => {
     try {
+      document.getElementById(
+        e.key.toUpperCase()
+      ).parentElement.children[0].style.backgroundColor = "#e74c3c";
       document.getElementById(e.key.toUpperCase()).currentTime = 0;
       let playPromise = document.getElementById(e.key.toUpperCase()).play();
       if (playPromise !== undefined) {
@@ -23,6 +27,15 @@ const handleKeyPressWrapper = (setTextFunc, buttonsarr) => {
       setTextFunc(name);
     } catch {}
   };
+};
+
+const handleKeyUp = (e) => {
+  // for wrong keys try -> catch
+  try {
+    document.getElementById(
+      e.key.toUpperCase()
+    ).parentElement.children[0].style.backgroundColor = "#0be881";
+  } catch {}
 };
 
 const dbHandleClickWrapper = (setTextFunc, buttonsarr) => {
@@ -103,8 +116,29 @@ const Dropdown = (props) => {
     }
   }, [props.keyboard, props.minimized]);
 
+  const dropdownVariants = {
+    hidden: { opacity: 0, x: "30px" },
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: { type: "ease-in-out" },
+    },
+    exit: {
+      opacity: 0,
+      x: "30px",
+      transition: { type: "ease-in-out" },
+    },
+  };
+
   return (
-    <div id="optionsdropdown" style={dropdownstyle}>
+    <motion.div
+      id="optionsdropdown"
+      style={dropdownstyle}
+      variants={dropdownVariants}
+      initial="hidden"
+      animate="open"
+      exit="exit"
+    >
       <h1 style={titlestyle}>Options</h1>
       <div id="keyboardswitch" className="switch-row" style={row1}>
         <div>QWERTY</div>
@@ -130,7 +164,7 @@ const Dropdown = (props) => {
         </label>
         <div>QWERTZ</div>
       </div> */}
-    </div>
+    </motion.div>
   );
 };
 
@@ -151,20 +185,22 @@ const Options = (props) => {
     height: "50px",
     width: "50px",
   };
-  if (state) {
-    return (
-      <React.Fragment>
-        <div id="options" style={optionsstyle} onClick={handleClick}></div>
-        <Dropdown
-          minimized={props.minimized}
-          setappstate={props.setappstate}
-          keyboard={props.keyboard}
-        />
-      </React.Fragment>
-    );
-  } else {
-    return <div id="options" style={optionsstyle} onClick={handleClick}></div>;
-  }
+
+  return (
+    <React.Fragment>
+      <div id="options" style={optionsstyle} onClick={handleClick}></div>
+      <AnimatePresence>
+        {state && (
+          <Dropdown
+            minimized={props.minimized}
+            setappstate={props.setappstate}
+            keyboard={props.keyboard}
+            animate={{ scale: 1.5 }}
+          />
+        )}
+      </AnimatePresence>
+    </React.Fragment>
+  );
 };
 
 const Display = (props) => {
@@ -176,30 +212,56 @@ const Display = (props) => {
 };
 
 const DrumButtons = (props) => {
+  const drumButtonsVariants = {
+    hidden: {
+      y: "140vh",
+    },
+    visible: {
+      y: 0,
+      transition: { type: "tween", duration: 1 },
+    },
+    exit: {
+      y: "140vh",
+      transition: { type: "tween", duration: 1 },
+    },
+  };
+
   return (
     <div id="db-wrapper">
-      {props.buttonsarr.map((elem, i) => {
-        return (
-          <div className="drum-button" key={i}>
-            <button
-              key={elem.press}
-              className="drum-pad"
-              customkey={i}
-              onClick={dbHandleClickWrapper(props.changetext, props.buttonsarr)}
-              id={elem.name}
+      <AnimatePresence>
+        {props.buttonsarr.map((elem, i) => {
+          return (
+            <motion.div
+              className="drum-button"
+              key={i}
+              variants={drumButtonsVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              <span className="front">{elem.press.toUpperCase()}</span>
-              <audio
-                key={elem.press.toUpperCase()}
-                id={elem.press.toUpperCase()}
-                src={props.buttonsarr[i].source}
-                preload="auto"
-                className="clip"
-              ></audio>
-            </button>
-          </div>
-        );
-      })}
+              <button
+                key={elem.press}
+                className="drum-pad"
+                customkey={i}
+                onClick={dbHandleClickWrapper(
+                  props.changetext,
+                  props.buttonsarr
+                )}
+                id={elem.name}
+              >
+                <span className="front">{elem.press.toUpperCase()}</span>
+                <audio
+                  key={elem.press.toUpperCase()}
+                  id={elem.press.toUpperCase()}
+                  src={props.buttonsarr[i].source}
+                  preload="auto"
+                  className="clip"
+                ></audio>
+              </button>
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
     </div>
   );
 };
@@ -264,17 +326,25 @@ function App(props) {
       "keydown",
       handleKeyPressWrapper(changeDisplayText, lastButtonsarr.current)
     );
+    document.addEventListener("keyup", handleKeyUp);
     return () => {
       // console.log("removed", lastButtonsarr.current);
       document.removeEventListener(
         "keydown",
         handleKeyPressWrapper(changeDisplayText, lastButtonsarr.current)
       );
+      document.removeEventListener("keyup", handleKeyUp);
     }; // eslint-disable-next-line
   }, [state.minimized, state.keyboard]);
 
   return (
-    <div className="App" id="drum-machine">
+    <motion.div
+      className="App"
+      id="drum-machine"
+      initial={{ scale: 0.7 }}
+      animate={{ scale: 1 }}
+      transition={{ delay: 0.2, duration: 0.5 }}
+    >
       <Options
         minimized={state.minimized}
         keyboard={state.keyboard}
@@ -282,7 +352,7 @@ function App(props) {
       />
       <Display text={state.text} />
       <DrumButtons changetext={changeDisplayText} buttonsarr={buttonsarr} />
-    </div>
+    </motion.div>
   );
 }
 
