@@ -53,29 +53,34 @@ const Dropdown = (props) => {
   let dropdownstyle = {
     display: "grid",
     gridGap: "10px",
-    gridTemplateRows: "70px 1fr 1fr 1fr",
+    gridTemplateRows: "70px 1fr 1fr",
     gridTemplateColumns: "1fr 70px",
-    gridTemplateAreas: '"header ." "row1 row1" "row2 row2" "row3 row3"',
+    gridTemplateAreas: '"header ." "row1 row1" "row2 row2"',
+    paddingBottom: "15px",
     justifySelf: "end",
     alignSelf: "start",
     width: "80%",
-    backgroundColor: "grey",
+    backgroundColor: "#1e272e",
     borderRadius: "5px",
+    color: "#ecf0f1",
   };
 
   let rowstyle = {
     display: "flex",
+    justifySelf: "center",
+    padding: "5px",
     gridColumn: "1 / 3",
     justifyContent: "space-evenly",
     alignItems: "center",
+    borderRadius: "10px",
+    width: "80%",
+    boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
   };
 
   let row1 = { ...rowstyle };
   row1["gridArea"] = "row1";
   let row2 = { ...rowstyle };
   row2["gridArea"] = "row2";
-  let row3 = { ...rowstyle };
-  row3["gridArea"] = "row3";
   let titlestyle = {
     gridArea: "header",
     justifySelf: "center",
@@ -130,6 +135,11 @@ const Dropdown = (props) => {
     },
   };
 
+  const rowVariants = {
+    visible: { backgroundColor: "#2d3436" },
+    hover: { backgroundColor: "#2c3e50" },
+  };
+
   return (
     <motion.div
       id="optionsdropdown"
@@ -140,30 +150,36 @@ const Dropdown = (props) => {
       exit="exit"
     >
       <h1 style={titlestyle}>Options</h1>
-      <div id="keyboardswitch" className="switch-row" style={row1}>
+      <motion.div
+        id="keyboardswitch"
+        className="switch-row"
+        style={row1}
+        variants={rowVariants}
+        initial="visible"
+        whileHover="hover"
+      >
         <div>QWERTY</div>
         <label className="switch">
           <input type="checkbox" onClick={keyboardToggle}></input>
           <span className="slider round"></span>
         </label>
         <div>QWERTZ</div>
-      </div>
-      <div id="minimizedswitch" className="switch-row" style={row2}>
+      </motion.div>
+      <motion.div
+        id="minimizedswitch"
+        className="switch-row"
+        style={row2}
+        variants={rowVariants}
+        initial="visible"
+        whileHover="hover"
+      >
         <div>Minimized</div>
         <label className="switch">
           <input type="checkbox" onClick={minimizedToggle}></input>
           <span className="slider round"></span>
         </label>
         <div>Maximised</div>
-      </div>
-      {/* <div id="keyboardswitch" className="switch-row" style={row3}>
-        <div>QWERTY</div>
-        <label className="switch">
-          <input type="checkbox"></input>
-          <span className="slider round"></span>
-        </label>
-        <div>QWERTZ</div>
-      </div> */}
+      </motion.div>
     </motion.div>
   );
 };
@@ -186,9 +202,20 @@ const Options = (props) => {
     width: "50px",
   };
 
+  const optionsVariants = {
+    visible: { backgroundColor: "#718093" },
+    hover: { backgroundColor: "#2c3e50" },
+  };
   return (
     <React.Fragment>
-      <div id="options" style={optionsstyle} onClick={handleClick}></div>
+      <motion.div
+        id="options"
+        variants={optionsVariants}
+        animate="visible"
+        whileHover="hover"
+        style={optionsstyle}
+        onClick={handleClick}
+      ></motion.div>
       <AnimatePresence>
         {state && (
           <Dropdown
