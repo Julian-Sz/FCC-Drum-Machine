@@ -53,13 +53,13 @@ const Dropdown = (props) => {
   let dropdownstyle = {
     display: "grid",
     gridGap: "10px",
+    zIndex: 1,
     gridTemplateRows: "70px 1fr 1fr",
     gridTemplateColumns: "1fr 70px",
     gridTemplateAreas: '"header ." "row1 row1" "row2 row2"',
-    paddingBottom: "15px",
+    padding: "0 15px 15px 15px",
     justifySelf: "end",
     alignSelf: "start",
-    width: "80%",
     backgroundColor: "#1e272e",
     borderRadius: "5px",
     color: "#ecf0f1",
@@ -73,7 +73,7 @@ const Dropdown = (props) => {
     justifyContent: "space-evenly",
     alignItems: "center",
     borderRadius: "10px",
-    width: "80%",
+    minWidth: "100%",
     boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
   };
 
@@ -191,7 +191,7 @@ const Options = (props) => {
   };
 
   let optionsstyle = {
-    zIndex: "1",
+    zIndex: 2,
     backgroundImage: "url('/FCC-Drum-Machine/gear-white.png')",
     backgroundSize: "90% auto",
     backgroundPosition: "50% 50%",
@@ -253,8 +253,15 @@ const DrumButtons = (props) => {
     },
   };
 
+  let dbWrapperStyle = {};
+  if (!props.minimized && window.innerWidth < 1300) {
+    dbWrapperStyle = {
+      gridTemplateColumns: "1fr 1fr 1fr 1fr",
+    };
+  }
+
   return (
-    <div id="db-wrapper">
+    <div id="db-wrapper" style={dbWrapperStyle}>
       <AnimatePresence>
         {props.buttonsarr.map((elem, i) => {
           return (
@@ -378,7 +385,11 @@ function App(props) {
         setappstate={setState}
       />
       <Display text={state.text} />
-      <DrumButtons changetext={changeDisplayText} buttonsarr={buttonsarr} />
+      <DrumButtons
+        changetext={changeDisplayText}
+        buttonsarr={buttonsarr}
+        minimized={state.minimized}
+      />
     </motion.div>
   );
 }
