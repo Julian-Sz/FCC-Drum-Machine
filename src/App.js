@@ -273,7 +273,7 @@ const DrumButtons = (props) => {
     width: "100%",
     height: "100%",
   };
-  let buttonTransition = { duration: 0.5, delay: 5 };
+  let buttonTransition = { duration: 0.5, delay: 0.1 };
   return (
     <div id="db-wrapper" style={dbWrapperStyle}>
       <AnimatePresence>
