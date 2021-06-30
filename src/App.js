@@ -40,11 +40,12 @@ const handleKeyUp = (e) => {
 
 const dbHandleClickWrapper = (setTextFunc, buttonsarr) => {
   return (e) => {
-    const customkey = e.target.attributes.customkey.value;
-    const button = buttonsarr[customkey];
-    const id = button.press.toUpperCase();
-    document.getElementById(id).currentTime = 0;
-    document.getElementById(id).play();
+    const character = e.target.firstChild.textContent;
+    document.getElementById(character).currentTime = 0;
+    document.getElementById(character).play();
+    let button = buttonsarr.filter((el) => {
+      return el.press === character.toLowerCase() ? true : false;
+    })[0];
     setTextFunc(button.name);
   };
 };
@@ -245,11 +246,19 @@ const DrumButtons = (props) => {
     },
     visible: {
       y: 0,
-      transition: { type: "tween", duration: 1 },
+      transition: {
+        type: "tween",
+        duration: 1,
+        delay: 0.1,
+      },
     },
     exit: {
       y: "140vh",
-      transition: { type: "tween", duration: 1 },
+      transition: {
+        type: "tween",
+        duration: 1,
+        delay: 0.1,
+      },
     },
   };
 
@@ -260,23 +269,29 @@ const DrumButtons = (props) => {
     };
   }
 
+  let singleWrapperStyle = {
+    width: "100%",
+    height: "100%",
+  };
+  let buttonTransition = { duration: 0.5, delay: 0.1 };
   return (
     <div id="db-wrapper" style={dbWrapperStyle}>
       <AnimatePresence>
         {props.buttonsarr.map((elem, i) => {
           return (
             <motion.div
-              className="drum-button"
-              key={i}
               variants={drumButtonsVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
+              key={elem.press}
+              style={singleWrapperStyle}
             >
-              <button
+              <motion.button
+                layout
+                transition={buttonTransition}
                 key={elem.press}
                 className="drum-pad"
-                customkey={i}
                 onClick={dbHandleClickWrapper(
                   props.changetext,
                   props.buttonsarr
@@ -291,7 +306,7 @@ const DrumButtons = (props) => {
                   preload="auto"
                   className="clip"
                 ></audio>
-              </button>
+              </motion.button>
             </motion.div>
           );
         })}
