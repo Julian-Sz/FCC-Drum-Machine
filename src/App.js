@@ -179,7 +179,7 @@ const Dropdown = (props) => {
           <input type="checkbox" onClick={minimizedToggle}></input>
           <span className="slider round"></span>
         </label>
-        <div>Maximised</div>
+        <div>Maximized</div>
       </motion.div>
     </motion.div>
   );
@@ -273,7 +273,7 @@ const DrumButtons = (props) => {
     width: "100%",
     height: "100%",
   };
-  let buttonTransition = { duration: 0.5, delay: 0.1 };
+  let buttonTransition = { duration: 0.5, delay: 5 };
   return (
     <div id="db-wrapper" style={dbWrapperStyle}>
       <AnimatePresence>
