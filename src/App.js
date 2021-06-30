@@ -254,7 +254,7 @@ const DrumButtons = (props) => {
   };
 
   let dbWrapperStyle = {};
-  if (!props.minimized && window.innerWidth < 1300) {
+  if (!props.minimized) {
     dbWrapperStyle = {
       gridTemplateColumns: "1fr 1fr 1fr 1fr",
     };
