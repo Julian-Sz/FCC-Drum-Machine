@@ -241,14 +241,11 @@ const Display = (props) => {
 
 const DrumButtons = (props) => {
   const drumButtonsVariants = {
-    hidden: {
-      y: "140vh",
-    },
     visible: {
       y: 0,
       transition: {
         type: "tween",
-        duration: 1,
+        duration: 0.8,
         delay: 0.1,
       },
     },
@@ -256,32 +253,43 @@ const DrumButtons = (props) => {
       y: "140vh",
       transition: {
         type: "tween",
-        duration: 1,
+        duration: 0.8,
         delay: 0.1,
       },
     },
   };
 
-  let dbWrapperStyle = {};
-  if (!props.minimized) {
-    dbWrapperStyle = {
-      gridTemplateColumns: "1fr 1fr 1fr 1fr",
-    };
-  }
+  const [dbWrapperStyle, setWrapperStyle] = useState({});
+  useEffect(() => {
+    if (!props.minimized) {
+      setWrapperStyle({ gridTemplateColumns: "1fr 1fr 1fr 1fr" });
+    }
+  }, [props.minimized]);
 
   let singleWrapperStyle = {
     width: "100%",
     height: "100%",
   };
-  let buttonTransition = { duration: 0.5, delay: 0.1 };
+
+  let buttonTransition = {
+    type: "spring",
+    duration: 0.9,
+    delay: 0.1,
+    bounce: 0.5,
+  };
+
   return (
     <div id="db-wrapper" style={dbWrapperStyle}>
-      <AnimatePresence>
+      <AnimatePresence
+        onExitComplete={() => {
+          setWrapperStyle({ gridTemplateColumns: "1fr 1fr 1fr" });
+        }}
+      >
         {props.buttonsarr.map((elem, i) => {
           return (
             <motion.div
               variants={drumButtonsVariants}
-              initial="hidden"
+              initial="exit"
               animate="visible"
               exit="exit"
               key={elem.press}
@@ -367,24 +375,15 @@ function App(props) {
     }
   }
 
-  let lastButtonsarr = React.useRef([]);
   useEffect(() => {
-    lastButtonsarr.current = buttonsarr;
-    // console.log("created", lastButtonsarr.current);
-    document.addEventListener(
-      "keydown",
-      handleKeyPressWrapper(changeDisplayText, lastButtonsarr.current)
-    );
+    let wrapper = handleKeyPressWrapper(changeDisplayText, buttonsarr);
+    document.addEventListener("keydown", wrapper);
     document.addEventListener("keyup", handleKeyUp);
     return () => {
-      // console.log("removed", lastButtonsarr.current);
-      document.removeEventListener(
-        "keydown",
-        handleKeyPressWrapper(changeDisplayText, lastButtonsarr.current)
-      );
+      document.removeEventListener("keydown", wrapper);
       document.removeEventListener("keyup", handleKeyUp);
-    }; // eslint-disable-next-line
-  }, [state.minimized, state.keyboard]);
+    };
+  });
 
   return (
     <motion.div
@@ -404,6 +403,7 @@ function App(props) {
         changetext={changeDisplayText}
         buttonsarr={buttonsarr}
         minimized={state.minimized}
+        keyboard={state.keyboard}
       />
     </motion.div>
   );
